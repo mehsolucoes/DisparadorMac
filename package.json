@@ -17,7 +17,7 @@
     "dist:mac": "npm run build && electron-builder --mac",
     "dist:linux": "npm run build && electron-builder --linux",
     "dist:all": "node build-multi.js",
-    "postinstall": "cd renderer && npm install",
+
     "test:connection": "node test-connection.js"
   },
   "dependencies": {

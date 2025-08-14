@@ -1,0 +1,10 @@
+{
+  "name": "renderer",
+  "version": "1.0.0",
+  "description": "Renderer for Disparador MEH",
+  "scripts": {
+    "build": "echo 'Build completed'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

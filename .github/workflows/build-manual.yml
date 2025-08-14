@@ -29,9 +29,9 @@ jobs:
         
     - name: Install dependencies
       run: |
-        npm ci
+        npm install
         if [ -d "renderer" ]; then
-          cd renderer && npm ci && cd ..
+          cd renderer && npm install && cd ..
         fi
         
     - name: Setup renderer
