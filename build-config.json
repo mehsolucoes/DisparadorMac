@@ -1,0 +1,78 @@
+{
+  "build": {
+    "appId": "com.mhsolucoes.disparador",
+    "productName": "Disparador M&H",
+    "directories": {
+      "buildResources": ".",
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "trial.js",
+      "config.json",
+      "utils/**/*",
+      "renderer/build/**/*",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "renderer/build",
+        "to": "renderer/build",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "utils",
+        "to": "utils",
+        "filter": ["**/*"]
+      }
+    ],
+    "mac": {
+      "target": ["dmg"],
+      "icon": "./iconemeh.icns",
+      "category": "public.app-category.business",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "darkModeSupport": true,
+      "minimumSystemVersion": "10.13.0"
+    },
+    "dmg": {
+      "title": "Disparador M&H TRIAL",
+      "icon": "./iconemeh.icns",
+      "background": "./build/background.png",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "format": "ULFO"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
+  "scripts": {
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "name": "disparador-meh",
+  "version": "0.1.0",
+  "description": "Disparador WhatsApp MEH - Versão TRIAL",
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently \"npm:start-react\" \"npm:start-electron\"",
+    "start-react": "cd renderer && cross-env BROWSER=none npm start",
+    "start-electron": "wait-on http://localhost:3000 && electron .",
+    "build": "cd renderer && npm run build",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:all": "node build-multi.js",
+    "postinstall": "cd renderer && npm install",
+    "test:connection": "node test-connection.js"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "nodemailer": "^6.9.13",
+    "qrcode": "^1.5.4",
+    "venom-bot": "^5.3.0",
+    "winreg": "^1.2.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^30.0.9",
+    "electron-builder": "^24.13.3",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.mhsolucoes.disparador",
+    "productName": "Disparador M&H",
+    "directories": {
+      "buildResources": ".",
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "trial.js",
+      "renderer/build/**/*",
+      "package.json",
+      "node_modules/**/*",
+      "chromium/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "renderer/build",
+        "to": "renderer/build",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./iconemeh.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "./iconemeh.icns",
+      "category": "public.app-category.business",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "./iconemeh.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "dmg": {
+      "title": "Disparador M&H TRIAL",
+      "icon": "./iconemeh.icns",
+      "background": "./build/background.png",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "author": "MH Soluções",
+  "license": "UNLICENSED"
+}
