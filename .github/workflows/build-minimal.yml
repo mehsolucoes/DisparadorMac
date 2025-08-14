@@ -132,7 +132,7 @@ jobs:
         
     - name: Install dependencies with cache
       run: |
-        npm ci --only=production --no-audit --no-fund
+        npm install --only=production --no-audit --no-fund
         npm install -g electron-builder@latest
         
     - name: Build macOS app
