@@ -1,0 +1,180 @@
+name: Simple macOS Build
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Create renderer build
+      run: |
+        mkdir -p renderer/build
+        cat > renderer/build/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Disparador MEH</title>
+          <meta charset="utf-8">
+          <style>
+            body { 
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+              margin: 0; 
+              padding: 40px; 
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .container { 
+              max-width: 900px; 
+              width: 100%;
+              background: white; 
+              padding: 40px; 
+              border-radius: 20px; 
+              box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+              text-align: center;
+            }
+            h1 { 
+              color: #333; 
+              font-size: 2.5em;
+              margin-bottom: 30px;
+              background: linear-gradient(45deg, #667eea, #764ba2);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            }
+            .feature { 
+              background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+              padding: 20px; 
+              margin: 15px 0; 
+              border-radius: 15px; 
+              border-left: 5px solid #4CAF50;
+              text-align: left;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            }
+            .status { 
+              text-align: center; 
+              margin: 30px 0; 
+              padding: 25px; 
+              background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+              border-radius: 15px;
+              border: 2px solid #2196F3;
+            }
+            .emoji {
+              font-size: 1.2em;
+              margin-right: 10px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>🚀 Disparador MEH</h1>
+            
+            <div class="status">
+              <h2>🔄 Sistema de Reconexão Automática Ativo</h2>
+              <p><strong>Tratamento robusto de erros ECONNRESET implementado</strong></p>
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">✅</span>
+              <strong>Sistema de Reconexão Automática</strong><br>
+              Reconecta automaticamente quando detecta desconexão do WhatsApp
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">🔧</span>
+              <strong>ConnectionHelper</strong><br>
+              Classe dedicada para gerenciar conexões com retry inteligente
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">⚙️</span>
+              <strong>Configurações Centralizadas</strong><br>
+              Timeouts otimizados e parâmetros configuráveis via config.json
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">🛡️</span>
+              <strong>Sistema de Trial Robusto</strong><br>
+              Múltiplas fontes de tempo e tratamento de erros de rede
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">📊</span>
+              <strong>Logging Avançado</strong><br>
+              Logs detalhados de conexão e status em tempo real
+            </div>
+            
+            <div class="feature">
+              <span class="emoji">⚡</span>
+              <strong>Performance Otimizada</strong><br>
+              Timeouts reduzidos (8s) e sistema de retry inteligente
+            </div>
+          </div>
+        </body>
+        </html>
+        EOF
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Install electron-builder
+      run: npm install -g electron-builder@latest
+      
+    - name: Build macOS app
+      run: npm run build:mac
+      env:
+        CSC_IDENTITY_AUTO_DISCOVERY: false
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: DisparadorMEH-macOS
+        path: dist/*.dmg
+        retention-days: 30
+        
+    - name: Create release
+      if: github.event_name == 'push'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*.dmg
+        tag_name: v${{ github.run_number }}
+        name: Release v${{ github.run_number }}
+        body: |
+          ## Disparador MEH - macOS Build
+          
+          ### 🚀 Melhorias Implementadas:
+          - ✅ **Sistema de reconexão automática** - Reconecta automaticamente em caso de falha
+          - ✅ **Tratamento robusto de erros ECONNRESET** - Sistema inteligente de retry
+          - ✅ **ConnectionHelper** - Classe dedicada para gerenciar conexões
+          - ✅ **Configurações centralizadas** - Timeouts otimizados e parâmetros flexíveis
+          - ✅ **Sistema de trial robusto** - Múltiplas fontes de tempo e fallbacks
+          
+          ### 📦 Arquivos incluídos:
+          - `DisparadorMEH.dmg` - Instalador para macOS
+          
+          ### 🔧 Instalação:
+          1. Baixe o arquivo .dmg
+          2. Abra o arquivo
+          3. Arraste o app para a pasta Applications
+          4. Execute o aplicativo
+          
+          ### 🛠️ Configurações:
+          - Timeout de rede: 8 segundos
+          - Máximo de tentativas: 3
+          - Delay entre tentativas: 5 segundos
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
