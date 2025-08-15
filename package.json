@@ -24,10 +24,10 @@
   "author": "MEH Soluções",
   "license": "MIT",
   "devDependencies": {
+    "electron": "^25.9.8",
     "electron-builder": "^24.9.1"
   },
   "dependencies": {
-    "electron": "^25.9.8",
     "venom-bot": "^4.3.7",
     "axios": "^1.6.2"
   },

@@ -129,10 +129,10 @@ jobs:
         </html>
         EOF
         
-    - name: Install essential dependencies
+    - name: Install all dependencies
       run: |
-        # Instalar dependências essenciais incluindo Electron
-        npm install venom-bot@4.3.7 axios@1.6.2 electron@25.9.8 --no-audit --no-fund --omit=dev --omit=optional
+        # Instalar todas as dependências (incluindo devDependencies)
+        npm install --no-audit --no-fund
         
         # Instalar electron-builder globalmente
         npm install -g electron-builder@latest --no-audit --no-fund
@@ -165,7 +165,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Instalação ultra-rápida**
+          - ✅ **Instalação otimizada**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
