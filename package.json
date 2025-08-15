@@ -25,7 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^16.2.8",
-    "electron-builder": "^18.12.0"
+    "electron-builder": "^18.11.0"
   },
   "dependencies": {
     "venom-bot": "^4.3.7",
