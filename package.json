@@ -29,17 +29,7 @@
   },
   "dependencies": {
     "venom-bot": "^4.3.7",
-    "axios": "^1.6.2",
-    "fs-extra": "^11.1.1"
-  },
-  "overrides": {
-    "rimraf": "^5.0.5",
-    "glob": "^10.3.10",
-    "puppeteer": "^21.11.0"
-  },
-  "resolutions": {
-    "rimraf": "^5.0.5",
-    "glob": "^10.3.10"
+    "axios": "^1.6.2"
   },
   "engines": {
     "node": ">=18.0.0",

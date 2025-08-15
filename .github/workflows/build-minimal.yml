@@ -1,4 +1,4 @@
-name: Minimal macOS Build
+name: Ultra Fast macOS Build
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     
     steps:
     - name: Checkout code
@@ -129,13 +129,10 @@ jobs:
         </html>
         EOF
         
-    - name: Install dependencies optimized
+    - name: Install only essential dependencies
       run: |
-        # Limpar cache npm
-        npm cache clean --force
-        
-        # Instalar apenas dependências essenciais
-        npm install --production --no-optional --no-audit --no-fund --prefer-offline --no-shrinkwrap
+        # Instalar apenas venom-bot e axios
+        npm install venom-bot@4.3.7 axios@1.6.2 --no-audit --no-fund --omit=dev --omit=optional
         
         # Instalar electron-builder globalmente
         npm install -g electron-builder@latest --no-audit --no-fund
@@ -160,7 +157,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         name: Release v${{ github.run_number }}
         body: |
-          ## Disparador MEH - macOS Build (Otimizado)
+          ## Disparador MEH - macOS Build (Ultra Fast)
           
           ### 🚀 Melhorias Implementadas:
           - ✅ **Sistema de reconexão automática**
@@ -168,7 +165,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Instalação otimizada de dependências**
+          - ✅ **Instalação ultra-rápida**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
