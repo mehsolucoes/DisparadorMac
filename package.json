@@ -6,15 +6,14 @@
   "scripts": {
     "start": "electron .",
     "build": "echo 'Build completed'",
-    "build:mac": "npm install --include=optional && electron-builder --mac",
-    "build:win": "npm install --include=optional && electron-builder --win", 
-    "build:linux": "npm install --include=optional && electron-builder --linux",
-    "build:all": "npm install --include=optional && electron-builder -mwl",
-    "dist:mac": "npm run build && npm install --include=optional && electron-builder --mac",
-    "dist:win": "npm run build && npm install --include=optional && electron-builder --win",
-    "dist:linux": "npm run build && npm install --include=optional && electron-builder --linux",
-    "test:connection": "node test-connection.js",
-    "postinstall": "npm install --include=optional"
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win", 
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "test:connection": "node test-connection.js"
   },
   "keywords": [
     "whatsapp",
