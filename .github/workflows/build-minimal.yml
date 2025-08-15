@@ -19,6 +19,11 @@ jobs:
       with:
         node-version: '18'
         
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
     - name: Create minimal renderer
       run: |
         mkdir -p renderer/build
@@ -157,7 +162,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         name: Release v${{ github.run_number }}
         body: |
-          ## Disparador MEH - macOS Build (Very Legacy Stable)
+          ## Disparador MEH - macOS Build (Python Fixed)
           
           ### 🚀 Melhorias Implementadas:
           - ✅ **Sistema de reconexão automática**
@@ -165,7 +170,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Versão muito antiga e estável do electron-builder**
+          - ✅ **Python configurado para build**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
