@@ -136,6 +136,10 @@ jobs:
         
     - name: Install all dependencies
       run: |
+        # Configurar Python path
+        export PYTHON=/usr/bin/python3
+        export npm_config_python=/usr/bin/python3
+        
         # Instalar todas as dependências (incluindo devDependencies)
         npm install --no-audit --no-fund
         
@@ -143,9 +147,15 @@ jobs:
         npm install -g electron-builder@21.2.0 --no-audit --no-fund
         
     - name: Build macOS app
-      run: npm run build:mac
+      run: |
+        # Configurar Python path para o build
+        export PYTHON=/usr/bin/python3
+        export npm_config_python=/usr/bin/python3
+        npm run build:mac
       env:
         CSC_IDENTITY_AUTO_DISCOVERY: false
+        PYTHON: /usr/bin/python3
+        npm_config_python: /usr/bin/python3
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -170,7 +180,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Python configurado para build**
+          - ✅ **Python configurado corretamente**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
