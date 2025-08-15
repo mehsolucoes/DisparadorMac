@@ -129,10 +129,10 @@ jobs:
         </html>
         EOF
         
-    - name: Install only essential dependencies
+    - name: Install essential dependencies
       run: |
-        # Instalar apenas venom-bot e axios
-        npm install venom-bot@4.3.7 axios@1.6.2 --no-audit --no-fund --omit=dev --omit=optional
+        # Instalar dependências essenciais incluindo Electron
+        npm install venom-bot@4.3.7 axios@1.6.2 electron@25.9.8 --no-audit --no-fund --omit=dev --omit=optional
         
         # Instalar electron-builder globalmente
         npm install -g electron-builder@latest --no-audit --no-fund
