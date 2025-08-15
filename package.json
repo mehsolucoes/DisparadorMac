@@ -31,8 +31,10 @@
     "venom-bot": "^4.3.7",
     "axios": "^1.6.2",
     "puppeteer": "^14.4.1",
+    "puppeteer-core": "^14.4.1",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "playwright-extra": "^4.3.6",
     "ws": "^8.8.0",
     "sharp": "^0.30.7",
     "encoding": "^0.1.13",
@@ -63,8 +65,7 @@
       "config.json",
       "utils/**/*",
       "renderer/build/**/*",
-      "package.json",
-      "node_modules/**/*"
+      "package.json"
     ],
     "extraResources": [
       {
@@ -93,6 +94,6 @@
     },
     "npmRebuild": false,
     "buildDependenciesFromSource": false,
-    "asar": false
+    "asar": true
   }
 }
