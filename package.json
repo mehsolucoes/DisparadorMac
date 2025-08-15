@@ -93,7 +93,6 @@
     },
     "npmRebuild": false,
     "buildDependenciesFromSource": false,
-    "includeSubNodeModules": true,
     "asar": false
   }
 }
