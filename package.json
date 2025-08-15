@@ -50,7 +50,9 @@
       "utils/**/*",
       "renderer/build/**/*",
       "package.json",
-      "node_modules/**/*"
+      "node_modules/venom-bot/**/*",
+      "node_modules/axios/**/*",
+      "node_modules/electron/**/*"
     ],
     "extraResources": [
       {
