@@ -134,8 +134,8 @@ jobs:
         # Instalar todas as dependências (incluindo devDependencies)
         npm install --no-audit --no-fund
         
-        # Instalar versão estável do electron-builder globalmente
-        npm install -g electron-builder@24.6.4 --no-audit --no-fund
+        # Instalar versão muito estável do electron-builder globalmente
+        npm install -g electron-builder@23.6.0 --no-audit --no-fund
         
     - name: Build macOS app
       run: npm run build:mac
@@ -157,7 +157,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         name: Release v${{ github.run_number }}
         body: |
-          ## Disparador MEH - macOS Build (Stable)
+          ## Disparador MEH - macOS Build (Very Stable)
           
           ### 🚀 Melhorias Implementadas:
           - ✅ **Sistema de reconexão automática**
@@ -165,7 +165,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Versão estável do electron-builder**
+          - ✅ **Versão muito estável do electron-builder**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
