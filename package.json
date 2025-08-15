@@ -66,9 +66,6 @@
     "mac": {
       "target": ["dmg"],
       "category": "public.app-category.business",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "darkModeSupport": true,
       "minimumSystemVersion": "10.13.0"
     },
     "dmg": {
