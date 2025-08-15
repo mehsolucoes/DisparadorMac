@@ -49,10 +49,7 @@
       "config.json",
       "utils/**/*",
       "renderer/build/**/*",
-      "package.json",
-      "node_modules/venom-bot/**/*",
-      "node_modules/axios/**/*",
-      "node_modules/electron/**/*"
+      "package.json"
     ],
     "extraResources": [
       {
@@ -97,6 +94,8 @@
     "publish": {
       "provider": "github",
       "releaseType": "release"
-    }
+    },
+    "npmRebuild": false,
+    "buildDependenciesFromSource": false
   }
 }

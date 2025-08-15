@@ -129,7 +129,11 @@ jobs:
         </html>
         EOF
         
-    - name: Install dependencies
+    - name: Install production dependencies
+      run: |
+        npm install --production --no-audit --no-fund
+        
+    - name: Install dev dependencies
       run: |
         npm install --no-audit --no-fund
         
@@ -153,7 +157,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         name: Release v${{ github.run_number }}
         body: |
-          ## Disparador MEH - macOS Build (Final)
+          ## Disparador MEH - macOS Build (Production Dependencies)
           
           ### 🚀 Melhorias Implementadas:
           - ✅ **Sistema de reconexão automática**
@@ -161,7 +165,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
-          - ✅ **Versões estáveis e testadas**
+          - ✅ **Dependências de produção otimizadas**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS
