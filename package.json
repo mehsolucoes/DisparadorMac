@@ -24,15 +24,15 @@
   "author": "MEH Soluções",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^20.3.12",
-    "electron-builder": "^21.2.0"
+    "electron": "^16.2.8",
+    "electron-builder": "^22.14.13"
   },
   "dependencies": {
     "venom-bot": "^4.3.7",
     "axios": "^1.6.2"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=16.0.0",
     "npm": ">=8.0.0"
   },
   "build": {
