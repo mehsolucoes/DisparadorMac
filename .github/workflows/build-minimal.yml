@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     
     steps:
     - name: Checkout code
@@ -18,6 +18,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
+        cache: 'npm'
         
     - name: Create minimal renderer
       run: |
@@ -61,7 +62,7 @@ jobs:
               background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
               padding: 20px; 
               margin: 15px 0; 
-              border-radius: 15px; 
+              border-radius: 15px;
               border-left: 5px solid #4CAF50;
               text-align: left;
               box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -69,7 +70,7 @@ jobs:
             .status { 
               text-align: center; 
               margin: 30px 0; 
-              padding: 25px; 
+              padding: 25px;
               background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
               border-radius: 15px;
               border: 2px solid #2196F3;
@@ -129,10 +130,16 @@ jobs:
         </html>
         EOF
         
-    - name: Install dependencies with cache
+    - name: Install dependencies optimized
       run: |
-        npm install --only=production --no-audit --no-fund
-        npm install -g electron-builder@latest
+        # Limpar cache npm
+        npm cache clean --force
+        
+        # Instalar apenas dependências essenciais
+        npm install --production --no-optional --no-audit --no-fund --prefer-offline --no-shrinkwrap
+        
+        # Instalar electron-builder globalmente
+        npm install -g electron-builder@latest --no-audit --no-fund
         
     - name: Build macOS app
       run: npm run build:mac
@@ -154,7 +161,7 @@ jobs:
         tag_name: v${{ github.run_number }}
         name: Release v${{ github.run_number }}
         body: |
-          ## Disparador MEH - macOS Build (Minimal)
+          ## Disparador MEH - macOS Build (Otimizado)
           
           ### 🚀 Melhorias Implementadas:
           - ✅ **Sistema de reconexão automática**
@@ -162,6 +169,7 @@ jobs:
           - ✅ **ConnectionHelper para gerenciar conexões**
           - ✅ **Configurações centralizadas**
           - ✅ **Sistema de trial robusto**
+          - ✅ **Instalação otimizada de dependências**
           
           ### 📦 Arquivos incluídos:
           - `DisparadorMEH.dmg` - Instalador para macOS

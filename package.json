@@ -1,39 +1,49 @@
 {
   "name": "disparador-meh",
-  "version": "0.1.0",
-  "description": "Disparador WhatsApp MEH - Versão TRIAL",
+  "version": "2.0.0",
+  "description": "Disparador WhatsApp MEH com sistema de reconexão automática",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently \"npm:start-react\" \"npm:start-electron\"",
-    "start-react": "cd renderer && cross-env BROWSER=none npm start",
-    "start-electron": "wait-on http://localhost:3000 && electron .",
-    "build": "cd renderer && npm run build",
+    "start": "electron .",
+    "build": "echo 'Build completed'",
     "build:mac": "electron-builder --mac",
-    "build:win": "electron-builder --win",
+    "build:win": "electron-builder --win", 
     "build:linux": "electron-builder --linux",
     "build:all": "electron-builder -mwl",
-    "dist": "npm run build && electron-builder",
-    "dist:win": "npm run build && electron-builder --win",
     "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
     "dist:linux": "npm run build && electron-builder --linux",
-    "dist:all": "node build-multi.js",
-
     "test:connection": "node test-connection.js"
   },
-  "dependencies": {
-    "axios": "^1.11.0",
-    "nodemailer": "^6.9.13",
-    "qrcode": "^1.5.4",
-    "venom-bot": "^5.3.0",
-    "winreg": "^1.2.5",
-    "xlsx": "^0.18.5"
-  },
+  "keywords": [
+    "whatsapp",
+    "automation",
+    "electron",
+    "venom-bot"
+  ],
+  "author": "MEH Soluções",
+  "license": "MIT",
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "cross-env": "^7.0.3",
-    "electron": "^30.0.9",
-    "electron-builder": "^24.13.3",
-    "wait-on": "^7.2.0"
+    "electron": "^25.9.8",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "venom-bot": "^4.3.7",
+    "axios": "^1.6.2",
+    "fs-extra": "^11.1.1"
+  },
+  "overrides": {
+    "rimraf": "^5.0.5",
+    "glob": "^10.3.10",
+    "puppeteer": "^21.11.0"
+  },
+  "resolutions": {
+    "rimraf": "^5.0.5",
+    "glob": "^10.3.10"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   },
   "build": {
     "appId": "com.mhsolucoes.disparador",
@@ -44,56 +54,36 @@
     },
     "files": [
       "main.js",
-      "preload.js",
+      "preload.js", 
       "trial.js",
+      "config.json",
+      "utils/**/*",
       "renderer/build/**/*",
       "package.json",
-      "node_modules/**/*",
-      "chromium/**/*"
+      "node_modules/**/*"
     ],
     "extraResources": [
       {
         "from": "renderer/build",
         "to": "renderer/build",
-        "filter": [
-          "**/*"
-        ]
+        "filter": ["**/*"]
+      },
+      {
+        "from": "utils",
+        "to": "utils", 
+        "filter": ["**/*"]
       }
     ],
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "./iconemeh.ico"
-    },
     "mac": {
-      "target": [
-        "dmg"
-      ],
-      "icon": "./iconemeh.icns",
+      "target": ["dmg"],
       "category": "public.app-category.business",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
-      "entitlements": "build/entitlements.mac.plist",
-      "entitlementsInherit": "build/entitlements.mac.plist"
-    },
-    "linux": {
-      "target": [
-        "AppImage"
-      ],
-      "icon": "./iconemeh.png"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "darkModeSupport": true,
+      "minimumSystemVersion": "10.13.0"
     },
     "dmg": {
       "title": "Disparador M&H TRIAL",
-      "icon": "./iconemeh.icns",
-      "background": "./build/background.png",
       "window": {
         "width": 540,
         "height": 380
@@ -109,9 +99,12 @@
           "type": "link",
           "path": "/Applications"
         }
-      ]
+      ],
+      "format": "ULFO"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
     }
-  },
-  "author": "MH Soluções",
-  "license": "UNLICENSED"
+  }
 }
