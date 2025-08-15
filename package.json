@@ -6,14 +6,15 @@
   "scripts": {
     "start": "electron .",
     "build": "echo 'Build completed'",
-    "build:mac": "electron-builder --mac",
-    "build:win": "electron-builder --win", 
-    "build:linux": "electron-builder --linux",
-    "build:all": "electron-builder -mwl",
-    "dist:mac": "npm run build && electron-builder --mac",
-    "dist:win": "npm run build && electron-builder --win",
-    "dist:linux": "npm run build && electron-builder --linux",
-    "test:connection": "node test-connection.js"
+    "build:mac": "npm install --include=optional && electron-builder --mac",
+    "build:win": "npm install --include=optional && electron-builder --win", 
+    "build:linux": "npm install --include=optional && electron-builder --linux",
+    "build:all": "npm install --include=optional && electron-builder -mwl",
+    "dist:mac": "npm run build && npm install --include=optional && electron-builder --mac",
+    "dist:win": "npm run build && npm install --include=optional && electron-builder --win",
+    "dist:linux": "npm run build && npm install --include=optional && electron-builder --linux",
+    "test:connection": "node test-connection.js",
+    "postinstall": "npm install --include=optional"
   },
   "keywords": [
     "whatsapp",
@@ -29,7 +30,21 @@
   },
   "dependencies": {
     "venom-bot": "^4.3.7",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "puppeteer": "^14.4.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "ws": "^8.8.0",
+    "sharp": "^0.30.7",
+    "encoding": "^0.1.13",
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^6.0.3"
+  },
+  "optionalDependencies": {
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0"
   },
   "engines": {
     "node": ">=16.0.0",
@@ -42,6 +57,28 @@
       "buildResources": ".",
       "output": "dist"
     },
+    "files": [
+      "main.js",
+      "preload.js",
+      "trial.js",
+      "config.json",
+      "utils/**/*",
+      "renderer/build/**/*",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "renderer/build",
+        "to": "renderer/build",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "utils",
+        "to": "utils",
+        "filter": ["**/*"]
+      }
+    ],
     "mac": {
       "target": ["dmg"],
       "category": "public.app-category.business",
@@ -56,6 +93,8 @@
       "releaseType": "release"
     },
     "npmRebuild": false,
-    "buildDependenciesFromSource": false
+    "buildDependenciesFromSource": false,
+    "includeSubNodeModules": true,
+    "asar": false
   }
 }

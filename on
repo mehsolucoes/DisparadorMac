@@ -1,0 +1,5 @@
+[33mde9a254[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Correção: Simplificar configuração DMG para evitar erro de módulo Perl
+[33m9e19879[m Correção: Instalar dependências de produção separadamente e desabilitar rebuild automático
+[33m5e19e2f[m Correção: Especificar exatamente quais node_modules incluir para evitar dependências não resolvidas
+[33m1cf316e[m ÚLTIMA TENTATIVA: electron-builder 20.4.6 - versão que não tem problemas com dmg-license
+[33m88e4535[m SOLUÇÃO FINAL: Usar Electron 16.2.8 + electron-builder 22.14.13 - versões estáveis sem problemas
