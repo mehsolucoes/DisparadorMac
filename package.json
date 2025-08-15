@@ -42,27 +42,6 @@
       "buildResources": ".",
       "output": "dist"
     },
-    "files": [
-      "main.js",
-      "preload.js", 
-      "trial.js",
-      "config.json",
-      "utils/**/*",
-      "renderer/build/**/*",
-      "package.json"
-    ],
-    "extraResources": [
-      {
-        "from": "renderer/build",
-        "to": "renderer/build",
-        "filter": ["**/*"]
-      },
-      {
-        "from": "utils",
-        "to": "utils", 
-        "filter": ["**/*"]
-      }
-    ],
     "mac": {
       "target": ["dmg"],
       "category": "public.app-category.business",
