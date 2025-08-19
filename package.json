@@ -29,7 +29,11 @@
   },
   "dependencies": {
     "venom-bot": "^4.3.7",
-    "axios": "^1.6.2"
+    "axios": "^1.6.2",
+    "xlsx": "^0.18.5",
+    "qrcode": "^1.5.3",
+    "nodemailer": "^6.9.7",
+    "winreg": "^1.2.4"
   },
   "engines": {
     "node": ">=16.0.0",
